@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add DOJ Token</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 50px;
+      background-color: #f4f4f4;
+    }
+    img {
+      width: 80px;
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: #f6851b;
+      color: white;
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e2761b;
+    }
+  </style>
+</head>
+<body>
+  <img src="https://raw.githubusercontent.com/TOKEN-TRUSTED/DOJ-TOKEN/main/doj-logo-256x256.png" alt="DOJ Logo">
+  <h2>Add DOJ COIN to MetaMask</h2>
+  <p>Click the button below to add the DOJ token to your MetaMask wallet:</p>
+  <button onclick="addDOJ()">Add DOJ to MetaMask</button>
+
+  <script>
+    async function addDOJ() {
+      try {
+        const wasAdded = await window.ethereum.request({
+          method: 'wallet_watchAsset',
+          params: {
+            type: 'ERC20',
+            options: {
+              address: '0x2815978CA263b0E82daEf5b2ba019Cc2FFc6097E',
+              symbol: 'DOJ',
+              decimals: 18,
+              image: 'https://raw.githubusercontent.com/TOKEN-TRUSTED/DOJ-TOKEN/main/doj-logo-256x256.png',
+            },
+          },
+        });
+
+        if (wasAdded) {
+          alert('✅ DOJ Token added to your wallet!');
+        } else {
+          alert('❌ Token add cancelled.');
+        }
+      } catch (error) {
+        console.error(error);
+        alert('⚠️ Error: ' + error.message);
+      }
+    }
+  </script>
+</body>
+</html>
