@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add DOJ Token</title>
+</head>
+<body>
+  <h2>Add DOJ COIN (DOJ) to MetaMask</h2>
+  <button onclick="addDOJ()">Add DOJ to MetaMask</button>
+
+  <script>
+    async function addDOJ() {
+      try {
+        const wasAdded = await window.ethereum.request({
+          method: 'wallet_watchAsset',
+          params: {
+            type: 'ERC20',
+            options: {
+              address: '0x2815978CA263b0E82daEf5b2ba019Cc2FFc6097E',
+              symbol: 'DOJ',
+              decimals: 18,
+              image: 'https://raw.githubusercontent.com/TOKEN-TRUSTED/DOJ-TOKEN/main/doj-logo-256x256.png',
+            },
+          },
+        });
+
+        if (wasAdded) {
+          alert('DOJ Token added!');
+        } else {
+          alert('Token add canceled.');
+        }
+      } catch (error) {
+        console.error(error);
+        alert('Error: ' + error.message);
+      }
+    }
+  </script>
+</body>
+</html>
